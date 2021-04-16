@@ -18,8 +18,8 @@ try:
 
     if int(ev)<2005 or int(ev)>2014:
         print("Sajnos csak 2005 és 2014 közötti adatokkal tudok szolgálni")
-    elif n>10:
-        print("Sajnos csak maximum 10 darab megyét tudok összehasonlítani grafikonon")
+    elif n > 12 or n < 2:
+        print("Sajnos csak minimum 2, és maximum 12 darab megyét tudok összehasonlítani grafikonon")
     else:
 
         fajlinteszt=open(sys.argv[1], "r")
@@ -89,42 +89,48 @@ try:
         #n darab lista létrehozva, bennük a fertőzések száma hetente, az első listában (dict['lista0']) a
         # legmagasabb átlaggal rendelkező megye, és így csökkennek az átlagok ahogy a lista száma nő
 
-        teng=[]
+        xteng=[]
         for i in range(len(dict['lista0'])):
-            teng.append(i)
+            xteng.append(i)
         #x tengelyhez használandó lista (0,1,2...hetekszama)
 
         # nem túl szép megoldás, de ezt máshogy nem tudtam összehozni, hogy n darab plt.plot legyen, és el lehessen őket nevezni
         s = 0
         if s < n:
-            line1, = plt.plot(teng, intte(dict["lista0"]), 'r')
+            line1, = plt.plot(xteng, intte(dict["lista0"]), 'r')
             s += 1
             if s < n:
-                line2, = plt.plot(teng, intte(dict["lista1"]), 'g')
+                line2, = plt.plot(xteng, intte(dict["lista1"]), 'g')
                 s += 1
                 if s < n:
-                    line3, = plt.plot(teng, intte(dict["lista2"]), 'b')
+                    line3, = plt.plot(xteng, intte(dict["lista2"]), 'b')
                     s += 1
                     if s < n:
-                        line4, = plt.plot(teng, intte(dict["lista3"]), 'y')
+                        line4, = plt.plot(xteng, intte(dict["lista3"]), 'y')
                         s += 1
                         if s < n:
-                            line5, = plt.plot(teng, intte(dict["lista4"]), 'c')
+                            line5, = plt.plot(xteng, intte(dict["lista4"]), 'c')
                             s += 1
                             if s < n:
-                                line6, = plt.plot(teng, intte(dict["lista5"]), 'm')
+                                line6, = plt.plot(xteng, intte(dict["lista5"]), 'm')
                                 s += 1
                                 if s < n:
-                                    line7, = plt.plot(teng, intte(dict["lista6"]), 'k')
+                                    line7, = plt.plot(xteng, intte(dict["lista6"]), 'k')
                                     s += 1
                                     if s < n:
-                                        line8, = plt.plot(teng, intte(dict["lista7"]), 'r--')
+                                        line8, = plt.plot(xteng, intte(dict["lista7"]), 'r--')
                                         s += 1
                                         if s < n:
-                                            line9, = plt.plot(teng, intte(dict["lista8"]), 'g--')
+                                            line9, = plt.plot(xteng, intte(dict["lista8"]), 'g--')
                                             s += 1
                                             if s < n:
-                                                line10, = plt.plot(teng, intte(dict["lista9"]), 'b--')
+                                                line10, = plt.plot(xteng, intte(dict["lista9"]), 'b--')
+                                                s += 1
+                                                if s < n:
+                                                    line11, = plt.plot(xteng, intte(dict["lista10"]), 'y--')
+                                                    s += 1
+                                                    if s < n:
+                                                        line12, = plt.plot(xteng, intte(dict["lista11"]), 'm--')
         #vonalak elnevezése
         if n == 1: plt.legend((line1), (atlagok[0][0]))
         if n == 2: plt.legend((line1, line2), (atlagok[0][0], atlagok[1][0]))
@@ -136,10 +142,11 @@ try:
         if n == 8: plt.legend((line1, line2, line3, line4, line5, line6, line7, line8), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0], atlagok[7][0]))
         if n == 9: plt.legend((line1, line2, line3, line4, line5, line6, line7, line8, line9), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0], atlagok[7][0], atlagok[8][0]))
         if n == 10:plt.legend((line1, line2, line3, line4, line5, line6, line7, line8, line9, line10), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0], atlagok[7][0], atlagok[8][0], atlagok[9][0]))
+        if n == 11:plt.legend((line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0], atlagok[7][0], atlagok[8][0], atlagok[9][0], atlagok[10][0]))
+        if n == 12:plt.legend((line1, line2, line3, line4, line5, line6, line7, line8, line9, line10, line11, line12), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0], atlagok[7][0], atlagok[8][0], atlagok[9][0], atlagok[10][0], atlagok[11][0]))
 
         #grafikon feliratok hozzáadása, jól írja a -ban/-ben -t az év után
-        ev=int(ev)
-        if ev==2005 or ev==2007 or ev==2009 or ev==2010 or ev==2011 or ev==2012 or ev==2014 or ev==2015:
+        if ev[3]=='1' or ev[3]=='2' or ev[3]=="4" or ev[3]=='5' or ev[3]=='7' or ev[3]=='9' or ev[2:4]=='10':
             plt.xlabel(f"Hetek száma {ev}-ben")
             plt.ylabel("Fertőzések száma/hét")
             plt.title(f"Bárányhimlő fertőzések {ev}-ben abban a(z) {n} darab megyénkben, ahol éves szinten a legmagasabb volt a fertőzöttségi átlag")
