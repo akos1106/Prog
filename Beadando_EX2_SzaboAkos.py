@@ -13,8 +13,9 @@ def substring(s,t):
     osszessubstring=[]
     for i in range(len(s)):
         for j in range(i,len(s)):
-            osszessubstring.append(s[i:(j+1)])
-    #megvan az összes substringje az s-nek
+            if len(s[i:(j+1)])>=len(t):
+                osszessubstring.append(s[i:(j+1)])
+    #megvan az összes substringje az s-nek, ami legalább t hosszúságú
 
     josubstringek=[]
     for subs in osszessubstring:
@@ -29,8 +30,9 @@ def substring(s,t):
     return min(josubstringek,key=len)
     # megvan a legrövidebb substring amiben benne van t összes betűje
 
+
 #MAIN
-s="ADOBECODEBANC"
+s="ADOBECODEBNAC"
 t ="ABC"
 
 s2="x"
@@ -38,7 +40,7 @@ t2="xx"
 
 s3="helloworld"
 t3="lwr"
-
+#
 print(substring(s,t))
 print(substring(s2,t2))
 print(substring(s3,t3))
