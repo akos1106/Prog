@@ -94,82 +94,48 @@ try:
             teng.append(i)
         #x tengelyhez használandó lista (0,1,2...hetekszama)
 
-        #nem túl szép megoldás, de ezt máshogy nem tudtam összehozni, hogy n darab plt.plot legyen, és el lehessen őket nevezni
-        if n==1:
+        # nem túl szép megoldás, de ezt máshogy nem tudtam összehozni, hogy n darab plt.plot legyen, és el lehessen őket nevezni
+        s = 0
+        if s < n:
             line1, = plt.plot(teng, intte(dict["lista0"]), 'r')
-            plt.legend((line1), (atlagok[0][0]))
-        if n==2:
-            line1, = plt.plot(teng, intte(dict["lista0"]), 'r')
-            line2, = plt.plot(teng, intte(dict["lista1"]), 'g')
-            plt.legend((line1,line2), (atlagok[0][0],atlagok[1][0]))
-        if n==3:
-            line1, = plt.plot(teng, intte(dict["lista0"]), 'r')
-            line2, = plt.plot(teng, intte(dict["lista1"]), 'g')
-            line3, = plt.plot(teng, intte(dict["lista2"]), 'b')
-            plt.legend((line1, line2, line3), (atlagok[0][0], atlagok[1][0], atlagok[2][0]))
-        if n==4:
-            line1, = plt.plot(teng, intte(dict["lista0"]), 'r')
-            line2, = plt.plot(teng, intte(dict["lista1"]), 'g')
-            line3, = plt.plot(teng, intte(dict["lista2"]), 'b')
-            line4, = plt.plot(teng, intte(dict["lista3"]), 'y')
-            plt.legend((line1, line2, line3, line4), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0]))
-        if n==5:
-            line1, = plt.plot(teng, intte(dict["lista0"]), 'r')
-            line2, = plt.plot(teng, intte(dict["lista1"]), 'g')
-            line3, = plt.plot(teng, intte(dict["lista2"]), 'b')
-            line4, = plt.plot(teng, intte(dict["lista3"]), 'y')
-            line5, = plt.plot(teng, intte(dict["lista4"]), 'c')
-            plt.legend((line1, line2, line3, line4, line5), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0]))
-        if n==6:
-            line1, = plt.plot(teng, intte(dict["lista0"]), 'r')
-            line2, = plt.plot(teng, intte(dict["lista1"]), 'g')
-            line3, = plt.plot(teng, intte(dict["lista2"]), 'b')
-            line4, = plt.plot(teng, intte(dict["lista3"]), 'y')
-            line5, = plt.plot(teng, intte(dict["lista4"]), 'c')
-            line6, = plt.plot(teng, intte(dict["lista5"]), 'm')
-            plt.legend((line1, line2, line3, line4, line5, line6), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0]))
-        if n==7:
-            line1, = plt.plot(teng, intte(dict["lista0"]), 'r')
-            line2, = plt.plot(teng, intte(dict["lista1"]), 'g')
-            line3, = plt.plot(teng, intte(dict["lista2"]), 'b')
-            line4, = plt.plot(teng, intte(dict["lista3"]), 'y')
-            line5, = plt.plot(teng, intte(dict["lista4"]), 'c')
-            line6, = plt.plot(teng, intte(dict["lista5"]), 'm')
-            line7, = plt.plot(teng, intte(dict["lista6"]), 'k')
-            plt.legend((line1, line2, line3, line4, line5, line6, line7), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0]))
-        if n==8:
-            line1, = plt.plot(teng, intte(dict["lista0"]), 'r')
-            line2, = plt.plot(teng, intte(dict["lista1"]), 'g')
-            line3, = plt.plot(teng, intte(dict["lista2"]), 'b')
-            line4, = plt.plot(teng, intte(dict["lista3"]), 'y')
-            line5, = plt.plot(teng, intte(dict["lista4"]), 'c')
-            line6, = plt.plot(teng, intte(dict["lista5"]), 'm')
-            line7, = plt.plot(teng, intte(dict["lista6"]), 'k')
-            line8, = plt.plot(teng, intte(dict["lista7"]), 'r--')
-            plt.legend((line1, line2, line3, line4, line5, line6, line7, line8), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0], atlagok[7][0]))
-        if n==9:
-            line1, = plt.plot(teng, intte(dict["lista0"]), 'r')
-            line2, = plt.plot(teng, intte(dict["lista1"]), 'g')
-            line3, = plt.plot(teng, intte(dict["lista2"]), 'b')
-            line4, = plt.plot(teng, intte(dict["lista3"]), 'y')
-            line5, = plt.plot(teng, intte(dict["lista4"]), 'c')
-            line6, = plt.plot(teng, intte(dict["lista5"]), 'm')
-            line7, = plt.plot(teng, intte(dict["lista6"]), 'k')
-            line8, = plt.plot(teng, intte(dict["lista7"]), 'r--')
-            line9, = plt.plot(teng, intte(dict["lista8"]), 'g--')
-            plt.legend((line1, line2, line3, line4, line5, line6, line7, line8, line9), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0], atlagok[7][0], atlagok[8][0]))
-        if n==10:
-            line1, = plt.plot(teng, intte(dict["lista0"]), 'r')
-            line2, = plt.plot(teng, intte(dict["lista1"]), 'g')
-            line3, = plt.plot(teng, intte(dict["lista2"]), 'b')
-            line4, = plt.plot(teng, intte(dict["lista3"]), 'y')
-            line5, = plt.plot(teng, intte(dict["lista4"]), 'c')
-            line6, = plt.plot(teng, intte(dict["lista5"]), 'm')
-            line7, = plt.plot(teng, intte(dict["lista6"]), 'k')
-            line8, = plt.plot(teng, intte(dict["lista7"]), 'r--')
-            line9, = plt.plot(teng, intte(dict["lista8"]), 'g--')
-            line10, = plt.plot(teng, intte(dict["lista9"]), 'b--')
-            plt.legend((line1, line2, line3, line4, line5, line6, line7, line8, line9, line10), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0], atlagok[7][0], atlagok[8][0], atlagok[9][0]))
+            s += 1
+            if s < n:
+                line2, = plt.plot(teng, intte(dict["lista1"]), 'g')
+                s += 1
+                if s < n:
+                    line3, = plt.plot(teng, intte(dict["lista2"]), 'b')
+                    s += 1
+                    if s < n:
+                        line4, = plt.plot(teng, intte(dict["lista3"]), 'y')
+                        s += 1
+                        if s < n:
+                            line5, = plt.plot(teng, intte(dict["lista4"]), 'c')
+                            s += 1
+                            if s < n:
+                                line6, = plt.plot(teng, intte(dict["lista5"]), 'm')
+                                s += 1
+                                if s < n:
+                                    line7, = plt.plot(teng, intte(dict["lista6"]), 'k')
+                                    s += 1
+                                    if s < n:
+                                        line8, = plt.plot(teng, intte(dict["lista7"]), 'r--')
+                                        s += 1
+                                        if s < n:
+                                            line9, = plt.plot(teng, intte(dict["lista8"]), 'g--')
+                                            s += 1
+                                            if s < n:
+                                                line10, = plt.plot(teng, intte(dict["lista9"]), 'b--')
+        #vonalak elnevezése
+        if n == 1: plt.legend((line1), (atlagok[0][0]))
+        if n == 2: plt.legend((line1, line2), (atlagok[0][0], atlagok[1][0]))
+        if n == 3: plt.legend((line1, line2, line3), (atlagok[0][0], atlagok[1][0], atlagok[2][0]))
+        if n == 4: plt.legend((line1, line2, line3, line4), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0]))
+        if n == 5: plt.legend((line1, line2, line3, line4, line5), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0]))
+        if n == 6: plt.legend((line1, line2, line3, line4, line5, line6), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0]))
+        if n == 7: plt.legend((line1, line2, line3, line4, line5, line6, line7), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0]))
+        if n == 8: plt.legend((line1, line2, line3, line4, line5, line6, line7, line8), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0], atlagok[7][0]))
+        if n == 9: plt.legend((line1, line2, line3, line4, line5, line6, line7, line8, line9), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0], atlagok[7][0], atlagok[8][0]))
+        if n == 10:plt.legend((line1, line2, line3, line4, line5, line6, line7, line8, line9, line10), (atlagok[0][0], atlagok[1][0], atlagok[2][0], atlagok[3][0], atlagok[4][0], atlagok[5][0], atlagok[6][0], atlagok[7][0], atlagok[8][0], atlagok[9][0]))
 
         #grafikon feliratok hozzáadása, jól írja a -ban/-ben -t az év után
         ev=int(ev)

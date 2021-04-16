@@ -28,7 +28,7 @@ def substring(s,t):
     #az összes substring megvan, amiben benne van a t összes betűje
 
     return min(josubstringek,key=len)
-    # megvan a legrövidebb substring amiben benne van t összes betűje
+    #megvan a legrövidebb substring, amiben benne van a t összes betűje
 
 
 #MAIN
@@ -40,7 +40,11 @@ t2="xx"
 
 s3="helloworld"
 t3="lwr"
-#
+
+s4="ABCDE"
+t4="ABCDEF"
+
 print(substring(s,t))
 print(substring(s2,t2))
 print(substring(s3,t3))
+print(substring(s4,t4))
