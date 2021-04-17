@@ -4,11 +4,11 @@ def substring(s,t):
     for betu in t:
         if betu not in s:
             return ""
-    #ha nincs s-ben a t összes betűje, akkor biztosan nem jó
+    #ha nincs s-ben a t összes betűje, akkor biztosan nem jó, visszaadja az üressztringet
 
     if len(s)<len(t):
         return ""
-    #ha s rövidebb mint t akkor biztosan nem jó
+    #ha s rövidebb mint t akkor biztosan nem jó, visszaadja az üressztringet
 
     osszessubstring=[]
     for i in range(len(s)):
@@ -28,7 +28,7 @@ def substring(s,t):
     #az összes substring megvan, amiben benne van a t összes betűje
 
     return min(josubstringek,key=len)
-    #megvan a legrövidebb substring, amiben benne van a t összes betűje
+    #megvan a legrövidebb substring, amiben benne van a t összes betűje, és ezt visszaadjuk
 
 
 #MAIN

@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 try:
+    #egy listát aminek az elemei nem int-ek, int-ekké alakít
     def intte(lista):
         ls=[]
         for i in lista:
@@ -15,48 +16,53 @@ try:
     ls = a.split(" ")
     ev = ls[0]
     n = int(ls[1])
+    #ls listában van a string ev, és int n változó
 
+    #ha arra az évszámra kíváncsi ami nincs az adatbázisba,
+    # vagy túl sok/kevés megyét akar összehasonlítani, hibaüzenetet kap a felhasználó
     if int(ev)<2005 or int(ev)>2014:
         print("Sajnos csak 2005 és 2014 közötti adatokkal tudok szolgálni")
     elif n > 12 or n < 2:
         print("Sajnos csak minimum 2, és maximum 12 darab megyét tudok összehasonlítani grafikonon")
     else:
 
+        #megnyitja a fájlt egyszer, hogy megnézze hányszor hanyas mátrix kell,
+        # amibe belefér az összes sor és oszlop abból az évből
         fajlinteszt=open(sys.argv[1], "r")
-        elso=fajlinteszt.readline()
-        listaa=elso.split(",")
-        oszlopokszama=len(listaa)
+        elsosor=fajlinteszt.readline()              #beolvassa az első sort a fájlból, ez utáni sorral folytatódik majd a beolvasás
+        listaelsooszlopbol=elsosor.split(",")
+        oszlopokszama=len(listaelsooszlopbol)       #megvan az oszlopok száma
         sorokszama=0
         for sor in fajlinteszt:
             sor = sor.strip()
-            listaaa = sor.split(",")
-            datum = listaaa[0].split("/")
-            if datum[2] == ev:
+            listaegysorbol = sor.split(",")
+            datum = listaegysorbol[0].split("/")    #datum listában a sor lista elő elemét szeleteli bele a "\" mentén
+            if datum[2] == ev:                      #ha a dátum lista 3. eleme (az év) egyezik a kért évvel, sorok száma megnő
                 sorokszama+=1
-        sorokszama+=1           #header miatt
+        sorokszama+=1                               #megvan a sorok száma, de plusz egy mert majd a headert is el akarom tárolni
         fajlinteszt.close()
-        #megvan hogy hányszor hanyas lesz az a mátrix amiben csak a megadott évi adatok vannak és az összes oszlop
 
+        #másodjára is megnyitja a fájlt, ezúttal az igazi munka folyik majd
         fajlin = open(sys.argv[1], "r")
 
         mat=np.empty((sorokszama,oszlopokszama),dtype=object)   #megfelelő méretű mátrix letrehozva
         k=0
-        elso=fajlin.readline()
+        elso=fajlin.readline()          #az első sort máshogy kell kezelni mint a többi sort, ezért külön teszem a mat-ba
         elso=elso.strip()
         elsolst=elso.split(",")
         for i in range(len(elsolst)):
             mat[k,i]=elsolst[i]
-        k=1
+        k=1                             #a k változóval követem, a mat melyik sorába is kell tenni az adatokat
         #header-t beletette a mat első sorába
 
         for sor in fajlin:
             sor = sor.strip()
             lista = sor.split(",")
             datum = lista[0].split("/")
-            if datum[2] == ev:
+            if datum[2] == ev:                  #megfelelő évű sorokat teszi bele a mat k-adik sorába
                 for i in range(len(lista)):
                     mat[k,i]=lista[i]
-                k+=1
+                k+=1                            #nő a k, nő hogy hanyadik sorba kell pakolni
         #a mat mátrix első sorában benne van a header, a többi sorában
         #   a megfelelő évhez tartozó adatok, és első oszlopban a dátumok
 
@@ -64,21 +70,22 @@ try:
         for j in range(oszlopokszama):
             sum=0
             for i in range(sorokszama):
-                if j>0 and i>0:
+                if j>0 and i>0:                 #hogy a headert és első oszlopot ne akarja az átlagba számítani
                     sum+=int(mat[i,j])
-            atlag=sum/(sorokszama-1)
+            atlag=sum/(sorokszama-1)            #egy oszlopbal lévő számok átlaga
             if j>0:
                 atlagok.append((mat[0,j],atlag))
-        #atlagok tuple-ben benne vannak a megyék nevei és hozzájuk az átlagok a megfelelő évben
+        #atlagok listában benne vannak a megyék nevei és hozzájuk az átlagok a megfelelő évben tuple-ökben
 
         atlagok.sort(key=lambda x: x[1], reverse=True)
+        #az atlagok elemei 2 elemű tuple-ök, és ezen tuple-ök másdoik elemét figyelembe véve teszi sorba a átlagok elemeit, csökkenve
         atlagok=atlagok[:n]
-        #atlagok tuple-ben benne van az első n db legnagyobb átlagú megye
+        #atlagok listában benne van az első n db legnagyobb átlagú megye
 
         dict={}
         for i in range(n):
             dict["lista"+str(i)]=[]
-        #szótár amelyben a keyek: "lista0","lista1","lista2"..."listan"; a value-k üres listák ([])
+        #szótár, amelyben a key-ek: "lista0","lista1"..."listaN"; a value-k üres listák ([])
 
         for i in range(n):
             for oszlop in range(oszlopokszama):
@@ -92,7 +99,7 @@ try:
         xteng=[]
         for i in range(len(dict['lista0'])):
             xteng.append(i)
-        #x tengelyhez használandó lista (0,1,2...hetekszama)
+        #x tengelyhez használandó lista (0,1,2...hetekSzama)
 
         # nem túl szép megoldás, de ezt máshogy nem tudtam összehozni, hogy n darab plt.plot legyen, és el lehessen őket nevezni
         s = 0
@@ -156,7 +163,9 @@ try:
             plt.ylabel("Fertőzések száma/hét")
             plt.title(f"Bárányhimlő fertőzések {ev}-ban abban a(z) {n} darab megyénkben, ahol éves szinten a legmagasabb volt a fertőzöttségi átlag")
             plt.show()
+
         fajlin.close()
 
+#ha nem jó fájlnevet adott meg a parancssori argumentumban
 except FileNotFoundError:
     print("Nem megfelelő elérési utat adott meg a beolvasandó fájlhoz")
