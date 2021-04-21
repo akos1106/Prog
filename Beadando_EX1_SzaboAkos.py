@@ -31,24 +31,24 @@ try:
             print("Sajnos csak minimum 2, és maximum 12 darab megyét tudok összehasonlítani grafikonon")
         else:
 
-            #megnyitja a fájlt egyszer, hogy megnézze hányszor hanyas mátrix kell,
+            #megnyitja a fájlt, megnézi hányszor hanyas mátrix kell,
             # amibe belefér az összes sor és oszlop abból az évből
-            fajlinteszt=open(sys.argv[1], "r")
-            elsosor=fajlinteszt.readline()              #beolvassa az első sort a fájlból, ez utáni sorral folytatódik majd a beolvasás
-            listaelsooszlopbol=elsosor.split(",")
-            oszlopokszama=len(listaelsooszlopbol)       #megvan az oszlopok száma
+            fajlin=open(sys.argv[1], "r")
+            elsosor=fajlin.readline()              #beolvassa az első sort a fájlból, ez utáni sorral folytatódik majd a beolvasás
+            listaelsosorbol=elsosor.split(",")
+            oszlopokszama=len(listaelsosorbol)       #megvan az oszlopok száma
             sorokszama=0
-            for sor in fajlinteszt:
-                sor = sor.strip()
+            for sor in fajlin:
+                # sor = sor.strip()
                 listaegysorbol = sor.split(",")
                 datum = listaegysorbol[0].split("/")    #datum listában a sor lista elő elemét szeleteli bele a "\" mentén
                 if datum[2] == ev:                      #ha a dátum lista 3. eleme (az év) egyezik a kért évvel, sorok száma megnő
                     sorokszama+=1
             sorokszama+=1                               #megvan a sorok száma, de plusz egy mert majd a headert is el akarom tárolni
-            fajlinteszt.close()
 
-            #másodjára is megnyitja a fájlt, ezúttal az igazi munka folyik majd
-            fajlin = open(sys.argv[1], "r")
+
+            #fájl elejére megy, és most fog következni a kellő adatok átpakolása a megfelelő méretű mat-ba
+            fajlin.seek(0)
 
             mat=np.empty((sorokszama,oszlopokszama),dtype=object)   #megfelelő méretű mátrix letrehozva
             k=0
