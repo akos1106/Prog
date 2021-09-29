@@ -1,0 +1,121 @@
+# class Polygon:
+#     def __init__(self,p1):
+#         assert p1>=3            #hogy csak a 3nál nagyobb számot fogadja el meghíváskor, ha feltétel nem teljesül, nem megy tovább a kód
+#         self.num_sides=p1
+#         self.sides_mag=[]
+#
+#     def inputSides(self):
+#         for i in range(int(self.num_sides)):
+#             self.sides_mag.append(float(input("Kérem az  {}. oldal hosszát: ".format(i+1))))
+#
+#     def dispSides(self):
+#         if len(self.sides_mag)==0:
+#             print("Az input_sides-ot meg kellene hívni először!")
+#         else:
+#             print("Oldalak hossza: ",end="")
+#             # for side in self.sides_mag:
+#             #     print(side,end=", ")
+#             for i in range(len(self.sides_mag)-1):
+#                 print(self.sides_mag[i],end=", ")
+#             print(self.sides_mag[len(self.sides_mag)-1])
+#
+# class Triangle(Polygon):
+#     def __init__(self):
+#        super().__init__(3)                   #Polygon.__init__(self,3) ugyanaz, poly meghívása 3-ra
+#
+#     # def __init__(self,p1):                     #de ez mindig 3
+#     #     Polygon.__init__(p1)
+#
+#     def getArea(self):
+#         s=self.getPerimeter()/2
+#         res=s
+#         for side_mag in self.sides_mag:
+#             res*=(s-side_mag)
+#         return res**0.5
+#
+#     def getPerimeter(self):
+#         return sum(self.sides_mag)
+#
+#
+# p1=Polygon(3)
+# # p1.inputSides()
+# # p1.dispSides()
+#
+# t1=Triangle()
+# t1.inputSides()
+# print(t1.getArea())
+
+
+############################################################
+
+
+
+# class BankAccount:
+#     def __init__(self,init_ballance):
+#         self.ballance=init_ballance
+#
+#     def withdraw(self,amount):
+#         self.ballance-=amount
+#
+#     def deposit(self,amount):
+#         self.ballance+=amount
+#
+#     def __str__(self):
+#         return  "Balance= "+str(self.ballance)
+#
+# class MinBankAccount(BankAccount):
+#     def __init__(self,init_ballance,min_amount):
+#         super().__init__(init_ballance)
+#         self.min_amount=min_amount
+#
+#     def withdraw(self,amount):
+#         if self.ballance-amount>=self.min_amount:
+#             self.ballance-=amount
+#         else:
+#             raise ValueError
+#
+#
+# # acc=BankAccount(1000)
+# # acc.withdraw(300)
+# # acc.deposit(200)
+# # print(acc)
+# #
+# # acc2=MinBankAccount(1000,200)
+# # acc2.withdraw(900)
+#
+# minacc=MinBankAccount(2000,1000)
+# print(minacc)
+# minacc.deposit(100)
+# print(minacc)
+# minacc.withdraw(1200)
+# print(minacc)
+
+
+############################################################
+
+
+class MyList(list):
+    def __init__(self,p1):
+        super().__init__(p1)
+
+    def clear(self):
+        res=[]
+        for e in self:
+            if e>=0:
+                res.append(e)
+        super().__init__(res)
+
+
+my_li=MyList([2,3,4,-3,-2])
+print(my_li)
+my_li.clear()
+print(my_li)
+
+
+#
+# li=[2,3,4,5,-1,-3]
+#
+# print(li)
+#
+# li.clear()      #azt akarjuk h csak a negatívakat törölje ki
+# print(li)
