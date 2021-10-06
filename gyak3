@@ -1,0 +1,142 @@
+# class A:
+#     def __init__(self):
+#         self.__szam=2       #privát lett
+#         self.szam2=4        #nyilvános
+#
+# a=A()
+# print(a.szam2)
+# print(a.szam)
+
+class Clock:
+    def __init__(self,hours=0,minutes=0,seconds=0):
+        self.__hours=hours
+        self.__minutes=minutes
+        self.__seconds=seconds
+
+    def set(self,hours,minutes,seconds):
+        self.__hours = hours
+        self.__minutes = minutes
+        self.__seconds = seconds
+
+    def display(self):
+        print("{:02d}:{:02d}:{:02d}".format(self.__hours,self.__minutes,self.__seconds))
+
+    def __str__(self):
+        return "{:02d}:{:02d}:{:02d}".format(self.__hours, self.__minutes, self.__seconds)
+
+    def tick(self):
+        if self.__seconds<59:
+            self.__seconds += 1
+        elif self.__minutes<59:
+            self.__seconds=0
+            self.__minutes+=1
+        elif self.__hours<23:
+            self.__hours+=1
+            self.__seconds = 0
+            self.__minutes = 0
+        else:
+            self.__seconds = 0
+            self.__minutes = 0
+            self.__hours=0
+
+
+# c1=Clock()
+# print(c1)
+# for i in range(86399):
+#     c1.tick()
+# print(c1)
+
+
+
+class Calendar:
+    months=(31,28,31,30,31,30,31,31,30,31,30,31)
+    months_szoko = (31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+    def __init__(self,day=1,month=1,year=1900):
+        self.__month=month
+        self.__day=day
+        self.__year=year
+
+    def leapyear(self,y):
+        if y%400==0:
+            return True
+        elif y%100==0:
+            return False
+        elif y%4==0:
+            return True
+        else:
+            return False
+
+    def leapyear2(self,y):
+        if y%4!=0:
+            return False
+        if y%100!=0:
+            return True
+        if y%400!=0:
+            return False
+        else:
+            return True
+
+    # def set(self,day,month,year):
+    #     pass
+
+    # def get(self):
+    #     pass
+
+    def advance(self):
+        if self.leapyear(self.__year):
+            months_length=self.months_szoko
+        else:
+            months_length = self.months
+        if self.day<months_length[self.__month-1]:
+            self.__day+=1
+        elif self.__month!=12 :
+            self.__day=1
+            self.__month+=1
+        else:
+            self.__day=1
+            self.__month=1
+            self.__year+=1
+
+    def __str__(self):
+        return "{}.{:02}.{:02}".format(self.__year,self.__month,self.__day)
+
+    @property
+    def day(self):
+        print("Property getter")
+        return self.__day
+
+    @day.setter
+    def day(self,d):
+        print("Property setter")
+        self.__day=d
+
+
+class CalendarClock(Clock,Calendar):
+    def __init__(self):
+        Clock.__init__(self)
+        Calendar.__init__(self)
+
+    def __str__(self):
+        return Clock.__str__(self)+" "+Calendar.__str__(self)
+
+
+cc=CalendarClock()
+print(cc)
+
+
+
+
+
+calendar1=Calendar()
+# print(calendar1.day)
+# calendar1.day=5
+# print(calendar1.day)
+# print(calendar1.leapyear2(1600))
+# print(calendar1.leapyear2(1700))
+# print(calendar1.leapyear2(1704))
+# print(calendar1.leapyear2(1703))
+print(calendar1)
+for i in range(58):
+    calendar1.advance()
+
+print(calendar1)
