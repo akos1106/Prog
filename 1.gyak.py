@@ -48,49 +48,50 @@ class Rational:
 
     def __eq__(self, other):
         if isinstance(other, Rational):
-            if (self.sz/self.n)==(self.sz/self.n):
+            if (self.sz/self.n)==(other.sz/other.n):
                 return "Igaz"
             else:
                 return "Hamis"
 
     def __gt__(self, other):
         if isinstance(other, Rational):
-            if (self.sz/self.n)>(self.sz/self.n):
+            if (self.sz/self.n)>(other.sz/other.n):
                 return "Igaz"
             else:
                 return "Hamis"
 
     def __ge__(self, other):
         if isinstance(other, Rational):
-            if (self.sz / self.n) >= (self.sz / self.n):
+            if (self.sz / self.n) >= (other.sz / other.n):
                 return "Igaz"
             else:
                 return "Hamis"
 
     def __lt__(self, other):
         if isinstance(other, Rational):
-            if (self.sz / self.n) < (self.sz / self.n):
+            if (self.sz / self.n) < (other.sz / other.n):
                 return "Igaz"
             else:
                 return "Hamis"
 
     def __le__(self, other):
         if isinstance(other, Rational):
-            if (self.sz / self.n) <= (self.sz / self.n):
+            if (self.sz / self.n) <= (other.sz / other.n):
                 return "Igaz"
             else:
                 return "Hamis"
 
     def __ne__(self, other):
         if isinstance(other, Rational):
-            if (self.sz / self.n) != (self.sz / self.n):
+            if (self.sz / self.n) != (other.sz / other.n):
                 return "Igaz"
             else:
                 return "Hamis"
 
 
 t1=Rational(1,2)
-t2=Rational(4,16)
+t2=Rational(1,4)
 # print(t1)
 # print(t1*t2)
 print(t1+t2)
+print(t1>t2)
