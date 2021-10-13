@@ -1,0 +1,139 @@
+class Content:
+    def __init__(self,title,page_num,price=-1.0):
+        self.__title=title
+        self.__page_num=page_num
+        self.__price=price
+
+    def get_title(self):
+        return self.__title
+
+    def get_price(self):
+        return self.__price
+
+    def set_price(self,value):
+        self.__price=value
+
+    def __str__(self):
+        return self.__title+", "+str(self.__page_num)+", "+str(self.__price)+" "
+
+
+
+
+
+class Author:
+    def __init__(self,name,birth_date):
+        self.__name=name
+        self.__birth_date=birth_date
+
+    def get_name(self):
+        return self.__name
+
+    def get_birth_date(self):
+        return self.__birth_date
+
+    def __str__(self):
+        return "by "+self.__name+", "+self.__birth_date
+
+
+
+
+
+class Book(Content,Author):
+    def __init__(self,name,birth_date,title,page_num,price=-1.0):
+        Content.__init__(self,title,page_num,price)
+        Author.__init__(self,name,birth_date)
+
+    def __str__(self):
+        return Content.__str__(self)+Author.__str__(self)
+
+    def __lt__(self, other):
+        if isinstance(other,Book):
+            if self.get_title()==other.get_title():
+                return self.get_birth_date().split(".")[0]>other.get_birth_date().split(".")[0]
+            else:
+                return self.get_title()<other.get_title()
+
+
+    def __gt__(self, other):
+        if isinstance(other,Book):
+            if self.get_title()==other.get_title():
+                return self.get_birth_date().split(".")[0] <other.get_birth_date().split(".")[0]
+            else:
+                return self.get_title()>other.get_title()
+
+
+    def __ge__(self, other):
+        return not self.__lt__(other)
+
+
+    def __le__(self, other):
+        return not self.__gt__(other)
+
+
+    def __eq__(self, other):
+        if isinstance(other,Book):
+            if self.get_title()==other.get_title():
+                return True
+            else:
+                return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+
+
+class Storage:
+    def __init__(self,location):
+        self.__location=location
+        self.__books = []
+
+    def read_book_from_f(self,f_name):
+        try:
+            f=open(f_name,"r")
+            for line in f:
+                line=line.strip()
+                li=line.split(", ")
+                if len(li)==5:
+                    b=Book(title=li[0],page_num=li[1],price=float(li[2]),name=li[3],birth_date=li[4])
+                else:
+                    b = Book(title=li[0], page_num=li[1], name=li[2], birth_date=li[3])
+
+                self.__books.append(b)
+
+        except FileNotFoundError:
+            print("Nincs ilyen file")
+
+
+    def __str__(self):
+        s=self.__location
+        for book in self.__books:
+            s+=' '+str(book)
+        return s
+
+    def get_books(self):
+        return self.__books
+
+
+def on_sale(raktar):
+    b=raktar.get_books()
+    for i in range(len(b)):
+        for j in range(i+1,len(b)):
+            if b[j]==b[i]:
+                b[i].set_price(b[i].get_price()*0.7)
+                print(b[i])
+                break
+
+
+
+
+#main
+s1=Storage("Debrecen")
+s1.read_book_from_f("books.txt")
+
+# print("Raktár: Debrecen")
+# for book in sorted(s1.get_books()):
+#     if book.get_price()!=-1:
+#         print(book)
+
+on_sale(s1)
+
