@@ -26,7 +26,7 @@ class Repulogep:
         return str(self.__hely)+" "+self.__tipus+" "+str(self.__maxseb)
 
     def szamol(self,tavolsag):
-        return self.__maxseb*tavolsag
+        return tavolsag/self.__maxseb
 
     def __lt__(self, other):
         if isinstance(other,Repulogep):
