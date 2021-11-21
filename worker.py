@@ -143,9 +143,16 @@ class Ui_MainWindow(object):
             if not email:
                 raise MissingDataException("email")
 
-            mail="valami@valami.hu"
-            if re.match('a+',mail):
-                print("yes")
+            # mail="valami@valami.hu"
+            # if re.match('a+',mail):
+            #     print("yes")
+
+            if not re.match('[+][3][6][237][0]\d{7}',phone_number):
+                raise PhoneNumberFormatException
+
+            if not re.match("[^@]+@[^@]+\.[^@]+", email):
+                raise EmailFormatException
+
 
 
 
