@@ -32,7 +32,7 @@ def count_words_and_letters(message):
     tmp=message.split(' ')
     for word in tmp:
         if word!="":
-            word_list.append(tmp)
+            word_list.append(word)
             letter_count+=len(word)
     return (word_list,len(word_list),letter_count)
 
@@ -48,7 +48,7 @@ def calc_bow(twitter_count):
 
 csv_file = csv.reader(open("TrumpTweets.csv","r",encoding='utf-8') , delimiter=";")
 
-tags_to_remove=["http","pic.","#","@","…","–","’","”","“","/xa0"]
+tags_to_remove=["http","pic.","#","@","…","–","’","”","“","\xa0"]
 
 twitterMessages=[]
 twitter_counts=[]
