@@ -1,0 +1,127 @@
+SET SERVEROUTPUT ON
+
+/*BEGIN
+    DBMS_OUTPUT.PUT_LINE('Hello, World!');
+END;
+*/
+
+
+/*DECLARE
+    v_nagyobb NUMBER;
+    x NUMBER := 7;
+    y NUMBER := 7;
+BEGIN
+    IF x < y THEN
+        DBMS_OUTPUT.PUT_LINE('x kisebb, mint y');
+        v_nagyobb := y;
+    ELSIF x > y THEN
+        DBMS_OUTPUT.PUT_LINE('x nagyobb, mint y');
+        v_nagyobb := x;
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('x és y egyenlők');
+        v_nagyobb := x;
+    END IF;
+END;
+*/
+
+
+/*
+DECLARE
+    v_szam NUMBER := 11;
+BEGIN
+    CASE
+        WHEN v_szam MOD 2 = 0
+            THEN DBMS_OUTPUT.PUT_LINE('Páros.');
+        WHEN v_szam < 5
+            THEN DBMS_OUTPUT.PUT_LINE('Kisebb 5-nél.');
+        WHEN v_szam > 5
+            THEN DBMS_OUTPUT.PUT_LINE('Nagyobb 5-nél.');
+        ELSE DBMS_OUTPUT.PUT_LINE('Ez csak az 5 lehet.');
+    END CASE;
+END;*/
+
+
+/*
+DECLARE
+    a NUMBER(5) := 10; b NUMBER(5) := 10;
+BEGIN
+    LOOP
+        b := b / a;
+        a := a - 1;
+    END LOOP;
+END;
+*/
+
+
+
+/*
+declare
+    a number(5) :=11;
+begin
+    if a mod 2=0
+        then DBMS_OUTPUT.PUT_LINE('A(z) '||to_char(a)||' páros.');
+        else DBMS_OUTPUT.PUT_LINE('A(z) '||to_char(a)||' páratlan.');
+    end if;
+end;
+*/
+
+
+/*
+declare
+    --ev number(4) :=extract(year from sysdate);
+    ev number(4) :=2020;
+begin
+    if (ev mod 4=0 and ev mod 100!=0) or (ev mod 400=0)
+        then DBMS_OUTPUT.PUT_LINE('A(z) '||to_char(ev)||' év szökőév.');
+        else DBMS_OUTPUT.PUT_LINE('A(z) '||to_char(ev)||' év nem szökőév.');
+    end if;
+end;
+*/
+
+
+/*
+--0 1 1 2 3 5 8 13 21 
+declare
+    szam1 number :=0;
+    szam2 number:=1;
+    temp number;
+    --n number := &n;
+    n number := 20;
+begin
+    DBMS_OUTPUT.PUT_LINE('Fibonacci számok');
+    DBMS_OUTPUT.PUT_LINE(szam1);
+    DBMS_OUTPUT.PUT_LINE(szam2);
+    for i in 2..n
+    loop
+    temp:=szam1+szam2;
+    szam1:=szam2;
+    szam2:=temp;
+    DBMS_OUTPUT.PUT_LINE(temp);
+    end loop;
+end;
+*/
+
+/*
+declare
+    n number:=153;
+    tmp number;
+    len number;
+    remain number;
+    summ number:=0;
+begin
+len:=length(n);
+tmp:=n;
+while tmp!=0
+loop
+remain:=tmp mod 10;
+summ:=summ+remain**len;
+tmp:=trunc(tmp/10);
+end loop;
+if n=summ
+then DBMS_OUTPUT.PUT_LINE('Igen');
+else DBMS_OUTPUT.PUT_LINE('Nem');
+end if;
+end;
+*/
+
+
